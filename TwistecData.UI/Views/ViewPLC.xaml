@@ -1,0 +1,96 @@
+﻿<Window x:Class="TwistecData.UI.Views.ViewPLC"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TwistecData.UI.Views"
+      xmlns:viewmodels="clr-namespace:TwistecData.UI.ViewModel"
+      mc:Ignorable="d" Width="900" Height="525"
+        DataContext="{Binding Main, Source={StaticResource Locator}}" >
+
+    <Grid Name="PLCView" Background="White" Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="547*"/>
+            <ColumnDefinition Width="350*"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Current Values" HorizontalAlignment="Left" Margin="150,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Future Values" HorizontalAlignment="Left" Margin="529,10,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="41,54,0,0" TextWrapping="Wrap" Text="Orden de Fabricación" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,54,0,0" TextWrapping="Wrap" 
+            Text="{Binding OrdenFrabricacion, Mode=OneWay}"  x:Name="OrdenFrabricacion1" VerticalAlignment="Top" Width="120"/>
+
+
+        <TextBlock HorizontalAlignment="Left" Margin="41,138,0,0" TextWrapping="Wrap" Text="Posición Fileta" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,138,0,0" TextWrapping="Wrap" 
+            Text="{Binding CreelPosition, Mode=OneWay}"  x:Name="CreelPosition1" VerticalAlignment="Top" Width="120"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="41,179,0,0" TextWrapping="Wrap" Text="Metros" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,179,0,0" TextWrapping="Wrap" 
+            Text="{Binding Metros, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="41,216,0,0" TextWrapping="Wrap" Text="RPM" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,216,0,0" TextWrapping="Wrap" 
+            Text="{Binding ActualRPM, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="41,253,0,0" TextWrapping="Wrap" Text="TPM" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,246,0,0" TextWrapping="Wrap" 
+            Text="{Binding ActualTPM, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="442,89,0,0" TextWrapping="Wrap" Text="Metros a realizar" VerticalAlignment="Top"/>
+        <TextBox Text="{Binding SetMetrosHechos, Mode=TwoWay}" HorizontalAlignment="Left" Height="23" Margin="46,89,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top" Width="120" x:Name="SetMetrosHechos1" Grid.Column="1"/>
+
+        <TextBlock HorizontalAlignment="Left" Margin="442,131,0,0" TextWrapping="Wrap" Text="Orden de Fabricación" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="46,131,0,0" TextWrapping="Wrap" 
+            Text="{Binding SetOrden, Mode=TwoWay}" x:Name ="SetOrden1" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="442,173,0,0" TextWrapping="Wrap" 
+            Text="Artículo" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="46,173,0,0" TextWrapping="Wrap" 
+            Text="{Binding SetArticulo, Mode=TwoWay}" x:Name="SetMaterial1" VerticalAlignment="Top" Width="120" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="442,215,0,0" TextWrapping="Wrap" Text="Posición Fileta" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="46,215,0,0" TextWrapping="Wrap" 
+            Text="{Binding SetPosicion, Mode=TwoWay}" VerticalAlignment="Top" Width="120" x:Name="SetPosicion1" Grid.Column="1" />
+
+
+        <Button Content="Cargar" HorizontalAlignment="Left" Margin="194,90,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding WritteMetersCommand}" Grid.Column="1" />
+        <Button Content="Cargar" HorizontalAlignment="Left" Margin="194,132,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding WritteOrderCommand}" Grid.Column="1" />
+        <Button Content="Cargar" HorizontalAlignment="Left" Margin="194,174,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding WritteArticleCommand}" Grid.Column="1" />
+        <Button Content="Cargar" HorizontalAlignment="Left" Margin="194,215,0,0" VerticalAlignment="Top" Width="75"
+            Command="{Binding WrittePositionCommand}" RenderTransformOrigin="0.44,2.364" Grid.Column="1" />
+
+
+        <Button Content="Refresh" HorizontalAlignment="Left" Margin="442,306,0,0" 
+            VerticalAlignment="Top" Width="75" Command="{Binding RefreshCommand}"/>
+        <Button Content="Export" HorizontalAlignment="Left" Margin="16,306,0,0" 
+            VerticalAlignment="Top" Width="75" Command="{Binding ExportCommand}" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,290,0,0" TextWrapping="Wrap" Text="Time" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="42,325,0,0" TextWrapping="Wrap" Text="Mmin" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,290,0,0" TextWrapping="Wrap" 
+            Text="{Binding Horas, Mode=OneWay}" VerticalAlignment="Top" Width="46"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="286,290,0,0" TextWrapping="Wrap" 
+            Text="{Binding Minuts, Mode=OneWay}" VerticalAlignment="Top" Width="41"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,325,0,0" TextWrapping="Wrap" 
+            Text="{Binding Mmin, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="41,99,0,0" TextWrapping="Wrap" Text="Articulo" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="192,99,0,0" TextWrapping="Wrap" 
+            Text="{Binding Carticulo, Mode=OneWay}" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="260,284,0,0" TextWrapping="Wrap" Text=":" VerticalAlignment="Top" Width="9" FontSize="20"/>
+
+        <Image Stretch="Fill" HorizontalAlignment="Left" Height="63" Margin="81,382,0,0" VerticalAlignment="Top" Width="298"  Source="TWIST.png"/>
+
+
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="122,303,0,0" TextWrapping="Wrap" 
+            Text="{Binding IP, Mode=OneWay}" VerticalAlignment="Top" Width="120" x:Name="SetPosicion1_Copy" Grid.Column="1" />
+        <TextBlock HorizontalAlignment="Left" Margin="166,462,0,0" 
+            TextWrapping="Wrap" VerticalAlignment="Top"  
+            Text="© Copyright Frimal Trading, S.L" FontSize="10"/>
+
+    </Grid>
+
+</Window>
